@@ -81,6 +81,6 @@ When using UTF-8 metric or label names, match the names as encoded in the respon
 
 See [the package tests](prometheustest_test.go) for more examples.
 
-> [!INFO]
+> [!NOTE]
 > Most of the code here is AI-generated
 > and has been thoroughly modified and verified by humans.
