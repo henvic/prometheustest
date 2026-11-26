@@ -2,6 +2,7 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/henvic/prometheustest.svg)](https://pkg.go.dev/github.com/henvic/prometheustest)
 [![Tests](https://github.com/henvic/prometheustest/actions/workflows/go.yml/badge.svg)](https://github.com/henvic/prometheustest/actions/workflows/go.yml)
+[![Coverage Status](https://coveralls.io/repos/henvic/prometheustest/badge.svg)](https://coveralls.io/github/henvic/prometheustest)
 
 Use [`Expect`](https://pkg.go.dev/github.com/henvic/prometheustest#Expect) to check selected Prometheus metric families in a Go test. Use [`Diff`](https://pkg.go.dev/github.com/henvic/prometheustest#Diff) to compare samples in Prometheus text format.
 
