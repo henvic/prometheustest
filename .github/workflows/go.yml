@@ -1,0 +1,41 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    # The branches below must be a subset of the branches above
+    branches: [ "main" ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        go: [1.26.x, 1.27.x] # when updating versions, update it below too.
+    runs-on: ${{ matrix.os }}
+    name: Test
+    steps:
+
+    - name: Check out code
+      uses: actions/checkout@v7
+
+    - name: Set up Go ${{ matrix.go }}
+      uses: actions/setup-go@v7
+      with:
+        go-version: ${{ matrix.go }}
+
+    - name: Test
+      if: ${{ matrix.os != 'ubuntu-latest' || matrix.go != '1.27.x' }}
+      run: go test -race ./...
+
+    - name: Test with code coverage
+      if: ${{ matrix.os == 'ubuntu-latest' && matrix.go == '1.27.x' }}
+      run: go test -race -covermode atomic -coverprofile=profile.cov ./...
+
+    - name: Code coverage
+      if: ${{ matrix.os == 'ubuntu-latest' && matrix.go == '1.27.x' }}
+      uses: shogo82148/actions-goveralls@v1
+      with:
+        path-to-profile: profile.cov
